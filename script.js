@@ -172,12 +172,44 @@ class Hash {
     this.table = [];
   }
 
+  checkLoadFactor() {
+    if (this.table.length > this.capacity * this.loadFactor) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  resizeTable() {
+    const tempArr = structuredClone(this);
+
+    this.capacity *= 2;
+    this.clearTable();
+
+    for (let i = 0; i < this.table.length; i++) {
+      if (tempArr.table[i] === null || tempArr.table[i] === undefined) continue;
+
+      let current = tempArr.table[i].head;
+
+      while (current) {
+        this.set(current.key, current.value);
+        current = current.nextNode;
+      }
+    }
+  }
+
   createHashTable() {
     for (let i = 0; i < this.capacity; i++) {
       if (this.table[i] === undefined) {
         this.table[i] = null;
       }
       if (this.table[i] !== null) continue;
+    }
+  }
+
+  clearTable() {
+    for (let i = 0; i < this.capacity; i++) {
+      this.table[i] = null;
     }
   }
 
@@ -209,9 +241,12 @@ class Hash {
 }
 
 let testHash = new Hash();
-console.log('🚀 ~ testHash:', testHash);
 
-testHash.set('Miyuki', 'jo');
+testHash.set('Miyuki', 'test1');
 testHash.set('Miyuki', 'test2');
-console.log('🚀 ~ testHash.table:', testHash.table);
-console.log('🚀 ~ testHash.table:', testHash.table[6].toString());
+testHash.set('Miyuki', 'test3');
+testHash.set('Miyuki', 'test4');
+
+testHash.resizeTable();
+console.log('🚀 ~ testHash:', testHash);
+console.log('🚀 ~ testHash:', testHash.table[22].toString());
