@@ -162,6 +162,7 @@ class LinkedList {
       removeNode.prevNode.nextNode = removeNode.nextNode;
       removeNode.nextNode.prevNode = removeNode.prevNode;
     }
+    this.#size--;
   }
 }
 
@@ -243,6 +244,11 @@ class Hash {
     if (this.table[keyIndex] === null) {
       this.table[keyIndex] = new LinkedList();
       this.table[keyIndex].append(key, value);
+    } else if (this.table[keyIndex].contain(key)) {
+      const linkedListIndex = this.table[keyIndex].find(key);
+
+      this.table[keyIndex].insertAt(key, value, linkedListIndex);
+      this.table[keyIndex].removeAt(linkedListIndex + 1);
     } else {
       this.table[keyIndex].append(key, value);
     }
@@ -274,17 +280,16 @@ testHash.set('oijoiuwiouqw', 'test4');
 testHash.set('cjajshquwu', 'test4');
 testHash.set('Miyuki', 'test4');
 
-console.log('🚀 ~ testHash.table:', testHash);
+console.log('🚀 ~ testHash:', testHash.table[22].toString());
+console.log(testHash.table[22]);
 
-console.log(
-  '🚀 ~ testHash.isCapacityExceeded():',
-  testHash.isCapacityExceeded()
-);
-// testHash.resizeTable();
-console.log('🚀 ~ testHash:', testHash);
+// console.log('🚀 ~ testHash:', testHash.table[22].toString());
+// console.log('🚀 ~ testHash:', testHash.table[22].find('Miyuki'));
+// console.log('🚀 ~ testHash:', testHash.table[22].removeAt(2));
+// console.log('🚀 ~ testHash:', testHash.table[22].toString());
+// console.log('🚀 ~ testHash:', testHash.table[22].removeAt(1));
 // console.log('🚀 ~ testHash:', testHash.table[22].toString());
 
-console.log(
-  '🚀 ~ testHash.isCapacityExceeded():',
-  testHash.isCapacityExceeded()
-);
+// console.log('🚀 ~ size:', testHash.table[22].size);
+// console.log('🚀 ~ testHash:', testHash.table[22].removeAt(1));
+// console.log('🚀 ~ testHash:', testHash.table[22].toString());
