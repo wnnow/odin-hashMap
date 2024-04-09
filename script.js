@@ -311,6 +311,24 @@ class Hash {
   //   }
   //   return keySize;
   // }
+
+  key() {
+    const keyArr = [];
+    for (let i = 0; i < this.table.length; i++) {
+      if (this.table[i] === null || this.table[i] === undefined) {
+        continue;
+      }
+      console.log(this.table[i]);
+      const tempArr = [];
+      let current = this.table[i].head;
+      while (current) {
+        tempArr.push(current);
+        current = current.nextNode;
+      }
+      keyArr.push(tempArr);
+    }
+    return keyArr;
+  }
 }
 
 let testHash = new Hash();
@@ -339,11 +357,14 @@ testHash.set('cjajshquwu', 'test22');
 testHash.set('Miyuki', 'test23');
 
 testHash.remove('Miyuki');
-console.log('🚀 ~ testHash:', testHash.table[22].toString());
+// console.log('🚀 ~ testHash:', testHash.table[22].toString());
 // console.log(testHash.table[22]);
-console.log(testHash.get('ojpojla'));
-console.log(testHash.has('Miyuki'));
-console.log(testHash.length());
+// console.log(testHash.get('ojpojla'));
+// console.log(testHash.has('Miyuki'));
+// console.log(testHash.length());
+// console.log(testHash);
+testHash.key();
+// console.log(testHash.key());
 
 // console.log('🚀 ~ testHash:', testHash.table[22].toString());
 // console.log('🚀 ~ testHash:', testHash.table[22].find('Miyuki'));
