@@ -173,7 +173,13 @@ class Hash {
   }
 
   checkLoadFactor() {
-    if (this.table.length > this.capacity * this.loadFactor) {
+    let countNull = 0;
+    for (let i = 0; i < this.table.length; i++) {
+      if (this.table[i] === null || this.table[i] === undefined) {
+        countNull++;
+      }
+    }
+    if (this.capacity - countNull > this.capacity * this.loadFactor) {
       return true;
     } else {
       return false;
@@ -246,7 +252,32 @@ testHash.set('Miyuki', 'test1');
 testHash.set('Miyuki', 'test2');
 testHash.set('Miyuki', 'test3');
 testHash.set('Miyuki', 'test4');
+testHash.set('as;djv;', 'test5');
+testHash.set('cmasxoq', 'test6');
+testHash.set('k2pfj', 'test7');
+testHash.set('x,.mca', 'test8');
+testHash.set('qpx,nvie', 'test9');
+testHash.set('ckqopjcw', 'test10');
+testHash.set('mcoqa', 'test11');
+testHash.set('ghjd', 'test12');
+testHash.set('qijoiq', 'test13');
+testHash.set('askclj', 'test14');
+testHash.set('lkaa a', 'test15');
+testHash.set('ojpojla', 'test16');
+testHash.set('yrtuvv', 'test17');
+testHash.set('kjgiuoiyqw', 'test18');
+testHash.set('ca,zka', 'test19');
+testHash.set('k137', 'test20');
 
+testHash.set('oijoiuwiouqw', 'test4');
+
+testHash.set('cjajshquwu', 'test4');
+
+console.log('🚀 ~ testHash.table:', testHash);
+
+console.log('🚀 ~ testHash.checkLoadFactor():', testHash.checkLoadFactor());
 testHash.resizeTable();
 console.log('🚀 ~ testHash:', testHash);
 console.log('🚀 ~ testHash:', testHash.table[22].toString());
+
+console.log('🚀 ~ testHash.checkLoadFactor():', testHash.checkLoadFactor());
