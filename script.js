@@ -167,6 +167,7 @@ class LinkedList {
 }
 
 class Hash {
+  #keyCount = 0;
   constructor(capacity = 16, loadFactor = 0.75) {
     this.capacity = capacity;
     this.loadFactor = loadFactor;
@@ -244,6 +245,7 @@ class Hash {
     if (this.table[keyIndex] === null) {
       this.table[keyIndex] = new LinkedList();
       this.table[keyIndex].append(key, value);
+      this.#keyCount++;
     } else if (this.table[keyIndex].contain(key)) {
       const linkedListIndex = this.table[keyIndex].find(key);
 
@@ -251,6 +253,7 @@ class Hash {
       this.table[keyIndex].removeAt(linkedListIndex + 1);
     } else {
       this.table[keyIndex].append(key, value);
+      this.#keyCount++;
     }
   }
 
@@ -289,7 +292,25 @@ class Hash {
         this.table[i].removeAt(linkedListIndex);
       }
     }
+    this.#keyCount--;
   }
+
+  //less compute, fast operation but need to create variable
+  length() {
+    return this.#keyCount;
+  }
+
+  // higher cost of computational in case store a lot of hash table
+  // length() {
+  //   let keySize = 0;
+  //   for (let i = 0; i < this.table.length; i++) {
+  //     if (this.table[i] === null || this.table[i] === undefined) {
+  //       continue;
+  //     }
+  //     keySize += this.table[i].size;
+  //   }
+  //   return keySize;
+  // }
 }
 
 let testHash = new Hash();
@@ -313,15 +334,16 @@ testHash.set('yrtuvv', 'test17');
 testHash.set('kjgiuoiyqw', 'test18');
 testHash.set('ca,zka', 'test19');
 testHash.set('k137', 'test20');
-testHash.set('oijoiuwiouqw', 'test4');
-testHash.set('cjajshquwu', 'test4');
-testHash.set('Miyuki', 'test4');
+testHash.set('oijoiuwiouqw', 'test21');
+testHash.set('cjajshquwu', 'test22');
+testHash.set('Miyuki', 'test23');
 
 testHash.remove('Miyuki');
 console.log('🚀 ~ testHash:', testHash.table[22].toString());
 // console.log(testHash.table[22]);
 console.log(testHash.get('ojpojla'));
 console.log(testHash.has('Miyuki'));
+console.log(testHash.length());
 
 // console.log('🚀 ~ testHash:', testHash.table[22].toString());
 // console.log('🚀 ~ testHash:', testHash.table[22].find('Miyuki'));
