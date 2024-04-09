@@ -278,6 +278,18 @@ class Hash {
     }
     return false;
   }
+
+  remove(key) {
+    for (let i = 0; i < this.table.length; i++) {
+      if (this.table[i] === null || this.table[i] === undefined) {
+        continue;
+      }
+      if (this.table[i].contain(key)) {
+        let linkedListIndex = this.table[i].find(key);
+        this.table[i].removeAt(linkedListIndex);
+      }
+    }
+  }
 }
 
 let testHash = new Hash();
@@ -305,10 +317,11 @@ testHash.set('oijoiuwiouqw', 'test4');
 testHash.set('cjajshquwu', 'test4');
 testHash.set('Miyuki', 'test4');
 
+testHash.remove('Miyuki');
 console.log('🚀 ~ testHash:', testHash.table[22].toString());
 // console.log(testHash.table[22]);
 console.log(testHash.get('ojpojla'));
-console.log(testHash.has('Miyukasi'));
+console.log(testHash.has('Miyuki'));
 
 // console.log('🚀 ~ testHash:', testHash.table[22].toString());
 // console.log('🚀 ~ testHash:', testHash.table[22].find('Miyuki'));
