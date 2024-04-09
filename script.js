@@ -168,11 +168,11 @@ class LinkedList {
 class Hash {
   constructor(capacity = 16, loadFactor = 0.75) {
     this.capacity = capacity;
-    this.loadFactor = 0.75;
+    this.loadFactor = loadFactor;
     this.table = [];
   }
 
-  checkLoadFactor() {
+  isCapacityExceeded() {
     let countNull = 0;
     for (let i = 0; i < this.table.length; i++) {
       if (this.table[i] === null || this.table[i] === undefined) {
@@ -231,6 +231,9 @@ class Hash {
   }
 
   set(key, value) {
+    if (this.isCapacityExceeded()) {
+      this.resizeTable();
+    }
     if (this.table[0] === undefined) {
       this.createHashTable();
     }
@@ -251,7 +254,6 @@ let testHash = new Hash();
 testHash.set('Miyuki', 'test1');
 testHash.set('Miyuki', 'test2');
 testHash.set('Miyuki', 'test3');
-testHash.set('Miyuki', 'test4');
 testHash.set('as;djv;', 'test5');
 testHash.set('cmasxoq', 'test6');
 testHash.set('k2pfj', 'test7');
@@ -268,16 +270,21 @@ testHash.set('yrtuvv', 'test17');
 testHash.set('kjgiuoiyqw', 'test18');
 testHash.set('ca,zka', 'test19');
 testHash.set('k137', 'test20');
-
 testHash.set('oijoiuwiouqw', 'test4');
-
 testHash.set('cjajshquwu', 'test4');
+testHash.set('Miyuki', 'test4');
 
 console.log('🚀 ~ testHash.table:', testHash);
 
-console.log('🚀 ~ testHash.checkLoadFactor():', testHash.checkLoadFactor());
-testHash.resizeTable();
+console.log(
+  '🚀 ~ testHash.isCapacityExceeded():',
+  testHash.isCapacityExceeded()
+);
+// testHash.resizeTable();
 console.log('🚀 ~ testHash:', testHash);
-console.log('🚀 ~ testHash:', testHash.table[22].toString());
+// console.log('🚀 ~ testHash:', testHash.table[22].toString());
 
-console.log('🚀 ~ testHash.checkLoadFactor():', testHash.checkLoadFactor());
+console.log(
+  '🚀 ~ testHash.isCapacityExceeded():',
+  testHash.isCapacityExceeded()
+);
