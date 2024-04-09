@@ -266,6 +266,18 @@ class Hash {
     }
     return null;
   }
+
+  has(key) {
+    for (let i = 0; i < this.table.length; i++) {
+      if (this.table[i] === null || this.table[i] === undefined) {
+        continue;
+      }
+      if (this.table[i].contain(key)) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
 
 let testHash = new Hash();
@@ -296,6 +308,7 @@ testHash.set('Miyuki', 'test4');
 console.log('🚀 ~ testHash:', testHash.table[22].toString());
 // console.log(testHash.table[22]);
 console.log(testHash.get('ojpojla'));
+console.log(testHash.has('Miyukasi'));
 
 // console.log('🚀 ~ testHash:', testHash.table[22].toString());
 // console.log('🚀 ~ testHash:', testHash.table[22].find('Miyuki'));
