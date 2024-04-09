@@ -253,6 +253,19 @@ class Hash {
       this.table[keyIndex].append(key, value);
     }
   }
+
+  get(key) {
+    for (let i = 0; i < this.table.length; i++) {
+      if (this.table[i] === null || this.table[i] === undefined) {
+        continue;
+      }
+      if (this.table[i].contain(key)) {
+        let linkedListIndex = this.table[i].find(key);
+        return this.table[i].at(linkedListIndex);
+      }
+    }
+    return null;
+  }
 }
 
 let testHash = new Hash();
@@ -281,7 +294,8 @@ testHash.set('cjajshquwu', 'test4');
 testHash.set('Miyuki', 'test4');
 
 console.log('🚀 ~ testHash:', testHash.table[22].toString());
-console.log(testHash.table[22]);
+// console.log(testHash.table[22]);
+console.log(testHash.get('ojpojla'));
 
 // console.log('🚀 ~ testHash:', testHash.table[22].toString());
 // console.log('🚀 ~ testHash:', testHash.table[22].find('Miyuki'));
