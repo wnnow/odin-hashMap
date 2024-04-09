@@ -312,13 +312,45 @@ class Hash {
   //   return keySize;
   // }
 
-  key() {
+  keys() {
     const keyArr = [];
     for (let i = 0; i < this.table.length; i++) {
       if (this.table[i] === null || this.table[i] === undefined) {
         continue;
       }
-      console.log(this.table[i]);
+
+      let current = this.table[i].head;
+      while (current) {
+        keyArr.push(current.key);
+        current = current.nextNode;
+      }
+    }
+    return keyArr;
+  }
+
+  values() {
+    const keyArr = [];
+    for (let i = 0; i < this.table.length; i++) {
+      if (this.table[i] === null || this.table[i] === undefined) {
+        continue;
+      }
+
+      let current = this.table[i].head;
+      while (current) {
+        keyArr.push(current.value);
+        current = current.nextNode;
+      }
+    }
+    return keyArr;
+  }
+
+  entries() {
+    const keyArr = [];
+    for (let i = 0; i < this.table.length; i++) {
+      if (this.table[i] === null || this.table[i] === undefined) {
+        continue;
+      }
+
       const tempArr = [];
       let current = this.table[i].head;
       while (current) {
@@ -363,8 +395,10 @@ testHash.remove('Miyuki');
 // console.log(testHash.has('Miyuki'));
 // console.log(testHash.length());
 // console.log(testHash);
-testHash.key();
-// console.log(testHash.key());
+testHash.keys();
+console.log(testHash.keys());
+console.log(testHash.values());
+console.log(testHash.entries());
 
 // console.log('🚀 ~ testHash:', testHash.table[22].toString());
 // console.log('🚀 ~ testHash:', testHash.table[22].find('Miyuki'));
